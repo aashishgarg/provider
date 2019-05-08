@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: Welcome@123
+  socket: /var/run/mysqld/mysqld.sock
+
+development:
+  <<: *default
+  database: provider_app_development
+
+test:
+  <<: *default
+  database: provider_app_test
+
+production:
+  <<: *default
+  database: provider_app_production
+  username: provider_app
+  password: <%= Rails.application.credentials.production[:database] %>
